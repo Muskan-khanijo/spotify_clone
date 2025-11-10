@@ -1,76 +1,134 @@
-# Spotify Clone – Full Stack Music Streaming Application
+# Spotify Clone Web App
 
-A **full-stack music streaming application** built using **HTML, CSS, JavaScript, Python, and SQL**, designed to replicate the core functionality and user interface of Spotify. Users can browse songs, play/pause tracks, navigate playlists, and interact with a dynamic music library stored in a SQL database.
-
----
-
-## Table of Contents
-
-1. [Overview](#overview)  
-2. [Features](#features)  
-3. [Technologies Used](#technologies-used)  
-4. [System Architecture](#system-architecture)  
-5. [Installation & Setup](#installation--setup)  
-6. [Project Structure](#project-structure)  
-7. [Database Design](#database-design)  
-8. [Usage](#usage)  
-9. [Future Improvements](#future-improvements)  
-10. [Author](#author)  
-11. [License](#license)  
+A **Spotify-like music streaming web application** built with **HTML, CSS, JavaScript, Python (Flask), and MySQL**. Users can **signup, login, play songs, search songs**, and **add their favorite songs** to their library.
 
 ---
 
-## Overview
+## 🔹 Features
 
-The **Spotify Clone** is a web-based music player application designed to demonstrate full-stack development skills. It combines:
+- **User Authentication**
+  - Signup and Login system
+  - Secure sessions for logged-in users
 
-- **Front-End:** HTML, CSS, and JavaScript for responsive and interactive UI.  
-- **Back-End:** Python (Flask/Django or custom server) for handling data and serving the application.  
-- **Database:** SQL (MySQL/SQLite) for storing songs, playlists, and user preferences.  
+- **Music Player**
+  - Play songs directly in the browser
+  - Display current song title, artist, and cover image
 
-This application simulates a real-world music streaming platform, allowing users to interact with songs, playlists, and audio playback dynamically.
+- **Search Songs**
+  - Search by song title or artist
+  - Dynamic filtering of songs
 
----
+- **Favorites / Library**
+  - Mark songs as favorite using heart button ❤️
+  - View favorite songs in your library
 
-## Features
-
-- **Play, Pause, Next, Previous:** Control music playback seamlessly.  
-- **Dynamic Playlist:** Songs are fetched from a SQL database and displayed in the playlist.  
-- **Responsive Design:** Works across desktop and mobile browsers.  
-- **Song Highlighting:** The currently playing song is visually highlighted.  
-- **Full-Stack Integration:** Front-end communicates with Python backend to fetch and manage song data.  
-- **Local Audio Playback:** Supports MP3 audio files stored on the server.
-
----
-
-## Technologies Used
-
-| Component       | Technology / Library                                
-|-----------------|----------------------------------------------------
-| Frontend        | HTML, CSS, JavaScript                              
-| Backend         | Python (Flask/Django or plain Python server)      
-| Database        | SQL (MySQL or SQLite)                               
-| Database Connector | mysql-connector-python / sqlite3                  
-| Media Files     | Local audio (MP3)                                   
-| Icons & UI      | Font Awesome, CSS animations                        
-| IDE / Tools     | VS Code, Sublime Text, Chrome Browser              
+- **Responsive Design**
+  - Modern UI inspired by Spotify
+  - Works on desktop and mobile
 
 ---
 
-## System Architecture
+## 🔹 Technologies Used
 
-1. **Front-End (HTML/CSS/JS)**  
-   - Displays the music player UI: navigation, playlist, and controls.  
-   - Handles audio playback and updates the UI dynamically using JavaScript.  
+- **Frontend:** HTML, CSS, JavaScript
+- **Backend:** Python, Flask
+- **Database:** MySQL
+- **Others:** Jinja2 templates, Flask sessions
 
-2. **Back-End (Python Server)**  
-   - Connects to SQL database to fetch songs, playlists, and metadata.  
-   - Serves HTML pages and static files (audio, CSS, JS).  
-   - Handles future extensions like user login, playlist creation, and analytics.  
+---
 
-3. **Database (SQL)**  
-   - Stores songs, playlists, and track metadata.  
-   - Supports dynamic fetching and updating of playlists.
+## 🔹 Project Structure
 
-**Flow Diagram:**  
+spotify_clone/
+│
+├─ static/
+│ ├─ songs/ # MP3 files
+│ ├─ covers/ # Song and app images
+│ ├─ style.css # CSS file
+│ └─ app.js # JavaScript file
+│
+├─ templates/
+│ ├─ index.html # Home page
+│ ├─ library.html # User library
+│ ├─ login.html # Login page
+│ └─ signup.html # Signup page
+│
+├─ app.py # Flask server code
+└─ README.md # Project documentation
 
+markdown
+Copy code
+
+---
+
+## 🔹 Database Design
+
+**Database:** `spotify_c3`
+
+**Tables:**
+
+1. **users**
+   - `id` INT AUTO_INCREMENT PRIMARY KEY
+   - `username` VARCHAR(50) UNIQUE
+   - `password` VARCHAR(100)
+
+2. **songs**
+   - `id` INT AUTO_INCREMENT PRIMARY KEY
+   - `title` VARCHAR(100)
+   - `artist` VARCHAR(100)
+   - `filename` VARCHAR(100)  _(song file path)_
+   - `image` VARCHAR(255)  _(cover image path)_
+
+3. **favorites**
+   - `id` INT AUTO_INCREMENT PRIMARY KEY
+   - `user_id` INT  _(FK: users.id)_
+   - `song_id` INT  _(FK: songs.id)_
+
+---
+
+## 🔹 Setup Instructions
+
+1. **Clone the repository**
+
+```bash
+git clone <your-repo-url>
+cd spotify_clone
+Install dependencies
+
+bash
+Copy code
+pip install flask mysql-connector-python
+Setup MySQL Database
+
+Create database and tables using the provided SQL script (spotify_c3.sql)
+
+Update app.py MySQL credentials if needed:
+
+python
+Copy code
+db = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    password="your_password",
+    database="spotify_c3"
+)
+Run the Flask App
+
+bash
+Copy code
+python app.py
+Open in Browser
+
+cpp
+Copy code
+http://127.0.0.1:5000/
+🔹 Usage
+Signup: Create a new account
+
+Login: Access the home page with all songs
+
+Play songs: Click the ▶ play button
+
+Favorite songs: Click the ❤️ heart button to add to library
+
+View Library: Click Library in the navbar to see your favorites
