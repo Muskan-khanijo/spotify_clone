@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Clone</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.ico') }}">
+
+</head>
+<body>
+    <h1>🎵 Spotify Clone</h1>
+
+    <div class="container">
+        {% for song in songs %}
+        <div class="song-card">
+            <img src="{{ song.cover_url }}" alt="{{ song.title }}">
+            <h3>{{ song.title }}</h3>
+            <p>{{ song.artist }}</p>
+            <button onclick="playSong('{{ song.audio_url }}', '{{ song.title }}')">▶ Play</button>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div id="player-box">
+        <h3 id="nowPlaying">Select a song to play...</h3>
+        <audio id="audioPlayer" controls></audio>
+    </div>
+
+    
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
